@@ -39,6 +39,10 @@ button {
   font-size: medium;
 }
 
+.delete {
+  margin-left: 3em;
+}
+
 h2 {
   margin-top: 2em;
   padding-top: 1em;

@@ -9,13 +9,33 @@ function ToDoList() {
     const addTodo = (event) => {
         event.preventDefault(); 
         if (inputValue.trim() !== "") {
-            setTodos([...todos, inputValue]);
+            const newTodo = {
+                id: Date.now(),
+                text: inputValue,
+                done: false
+            };
+            setTodos([...todos, newTodo]);
             setInputValue("");
         }
     };
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
+    };
+
+    const handleCheck = (id) => {
+        const newTodos = todos.map((todo) => {
+            if(todo.id === id){
+                todo.done = !todo.done;
+            }
+            return todo;
+        })
+        setTodos(newTodos);
+    };
+
+    const deleteTodo = () => {
+        const delTodo = todos.filter(todo => !todo.done);
+        setTodos(delTodo);
     };
 
     return (
@@ -35,10 +55,17 @@ function ToDoList() {
             </form>
             <h2>Todos</h2>
             <ul>
-                {todos.map((todo, index) => (
-                    <li key={index}><input type="checkbox" />{todo}</li>
+                {todos.map((todo) => (
+                    <li key={todo.id}>
+                        <input 
+                            id={todo.id} 
+                            type="checkbox"
+                            checked={todo.done} 
+                            onChange={() => handleCheck(todo.id)} />{todo.text}
+                    </li>
                 ))}
             </ul>
+            <button className="delete" onClick={deleteTodo}>Delete</button>
         </div>
     );
 }
