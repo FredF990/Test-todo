@@ -37,6 +37,13 @@ button {
   padding-right: 2em;
   border-radius: 0.3em;
   font-size: medium;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+button:hover {
+  background-color: white;
+  color: blue;
 }
 
 .delete {
